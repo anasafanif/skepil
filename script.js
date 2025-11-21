@@ -67,7 +67,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const calendarLabel = document.getElementById('calendarLabel');
     const timeSlotsContainer = document.getElementById('timeSlots');
 
+    // Modal Elements
+    const bookingModal = document.getElementById('bookingModal');
+    const closeModal = document.querySelector('.close-modal');
+    const bookingForm = document.getElementById('bookingForm');
+    const bookingDetails = document.getElementById('bookingDetails');
+
     let currentDate = new Date();
+    let selectedDate = null;
 
     function renderCalendar(date) {
         calendarGrid.innerHTML = `
@@ -112,12 +119,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const today = new Date();
             if (i === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
                 day.classList.add('active');
+                selectedDate = new Date(year, month, i);
                 renderTimeSlots(); // Render slots for today by default
             }
 
             day.addEventListener('click', () => {
                 document.querySelectorAll('.mock-day').forEach(d => d.classList.remove('active'));
                 day.classList.add('active');
+                selectedDate = new Date(year, month, i);
                 renderTimeSlots();
             });
 
@@ -138,20 +147,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 const displayHour = hour > 12 ? hour - 12 : hour;
                 const ampm = hour >= 12 ? 'PM' : 'AM';
                 const displayMin = min === 0 ? '00' : min;
+                const timeString = `${displayHour}:${displayMin} ${ampm}`;
 
-                timeSlot.textContent = `${displayHour}:${displayMin} ${ampm}`;
+                timeSlot.textContent = timeString;
 
                 timeSlot.addEventListener('click', () => {
-                    document.querySelectorAll('.mock-time').forEach(t => t.classList.remove('active')); // Assuming active style for time slot exists or re-using hover style logic
-                    timeSlot.style.backgroundColor = 'var(--color-accent)';
-                    timeSlot.style.color = 'var(--color-white)';
-                    // Reset others
-                    Array.from(timeSlotsContainer.children).forEach(child => {
-                        if (child !== timeSlot) {
-                            child.style.backgroundColor = '';
-                            child.style.color = '';
-                        }
-                    });
+                    document.querySelectorAll('.mock-time').forEach(t => t.classList.remove('active'));
+                    timeSlot.classList.add('active'); // Use class for active state
+
+                    // Open Modal
+                    if (selectedDate) {
+                        const dateString = selectedDate.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+                        bookingDetails.textContent = `You are booking a consultation for ${dateString} at ${timeString}.`;
+                        bookingModal.classList.add('active');
+                    }
                 });
 
                 timeSlotsContainer.appendChild(timeSlot);
@@ -167,6 +176,31 @@ document.addEventListener('DOMContentLoaded', () => {
     nextMonthBtn.addEventListener('click', () => {
         currentDate.setMonth(currentDate.getMonth() + 1);
         renderCalendar(currentDate);
+    });
+
+    // Modal Logic
+    closeModal.addEventListener('click', () => {
+        bookingModal.classList.remove('active');
+    });
+
+    window.addEventListener('click', (e) => {
+        if (e.target === bookingModal) {
+            bookingModal.classList.remove('active');
+        }
+    });
+
+    bookingForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+
+        // Simulate API call
+        setTimeout(() => {
+            alert(`Thank you, ${name}! Your appointment has been confirmed. A confirmation email has been sent to ${email}.`);
+            bookingModal.classList.remove('active');
+            bookingForm.reset();
+            document.querySelectorAll('.mock-time').forEach(t => t.classList.remove('active'));
+        }, 500);
     });
 
     // Initial render
