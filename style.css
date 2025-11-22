@@ -397,54 +397,6 @@ img {
 .pricing-list li {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
-    padding: var(--spacing-sm) 0;
-    border-bottom: none;
-}
-
-.pricing-list li span:first-child {
-    order: 1;
-    font-weight: 500;
-    color: var(--color-text);
-    background: var(--color-white);
-    padding-right: 10px;
-    position: relative;
-    z-index: 1;
-}
-
-.pricing-list li::after {
-    content: '';
-    flex: 1;
-    border-bottom: 2px dotted #dcdcdc;
-    margin: 0 5px;
-    order: 2;
-    position: relative;
-    top: -5px;
-    z-index: 0;
-}
-
-.pricing-list li span:last-child {
-    order: 3;
-    font-weight: 700;
-    color: var(--color-accent);
-    padding-left: 10px;
-    background: var(--color-white);
-    position: relative;
-    z-index: 1;
-}
-
-.badge {
-    background-color: var(--color-accent);
-    color: var(--color-white);
-    font-size: 0.8rem;
-    padding: 0.2rem 0.5rem;
-    border-radius: var(--radius-sm);
-    margin-left: var(--spacing-xs);
-}
-
-/* Packages */
-.packages-headline {
-    text-align: center;
     margin-bottom: var(--spacing-md);
 }
 
