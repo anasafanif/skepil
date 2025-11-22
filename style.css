@@ -1,23 +1,23 @@
 :root {
-    /* Color Palette - Feminine & Comfortable Spa */
-    --color-bg: #FAF9F6;
-    /* Soft Warm Cream */
-    --color-bg-alt: #FDF5F2;
-    /* Blush Pink/Nude */
-    --color-text: #4A4A4A;
-    /* Softer Dark Grey */
-    --color-accent: #E0B0A0;
-    /* Rose Gold */
-    --color-accent-hover: #C08A7D;
-    /* Deeper Rose/Mauve */
+    /* Color Palette - Bolder Feminine & Comfortable */
+    --color-bg: #F9EEE9;
+    /* Visible Warm Nude */
+    --color-bg-alt: #FFFFFF;
+    /* White for contrast sections */
+    --color-text: #4A3B32;
+    /* Warm Dark Brown */
+    --color-accent: #C59D88;
+    /* Rich Rose Gold */
+    --color-accent-hover: #A87B69;
+    /* Deeper Earthy Rose */
     --color-white: #FFFFFF;
-    --color-grey-light: #F2EBE9;
-    /* Warm Light Grey */
+    --color-grey-light: #E8DAD5;
+    /* Warm Grey/Beige */
 
-    /* Shadows - Soft & Diffused */
-    --shadow-sm: 0 4px 20px rgba(224, 176, 160, 0.1);
-    --shadow-md: 0 10px 30px rgba(224, 176, 160, 0.15);
-    --shadow-lg: 0 20px 40px rgba(224, 176, 160, 0.2);
+    /* Shadows - Stronger & Warmer */
+    --shadow-sm: 0 4px 12px rgba(74, 59, 50, 0.08);
+    --shadow-md: 0 8px 24px rgba(74, 59, 50, 0.12);
+    --shadow-lg: 0 16px 40px rgba(74, 59, 50, 0.15);
 
     /* Typography */
     --font-heading: 'Playfair Display', serif;
@@ -31,9 +31,9 @@
     --spacing-xl: 8rem;
 
     /* Shapes */
-    --radius-sm: 8px;
-    --radius-md: 16px;
-    --radius-lg: 24px;
+    --radius-sm: 12px;
+    --radius-md: 24px;
+    --radius-lg: 32px;
     --radius-full: 9999px;
 
     /* Transitions */
@@ -81,10 +81,10 @@ body {
     color: var(--color-text);
     line-height: 1.6;
     overflow-x: hidden;
-    /* Soft Organic Background Pattern */
+    /* Visible Organic Background Pattern */
     background-image:
-        radial-gradient(circle at 10% 20%, rgba(224, 176, 160, 0.05) 0%, transparent 20%),
-        radial-gradient(circle at 90% 80%, rgba(224, 176, 160, 0.05) 0%, transparent 20%);
+        radial-gradient(circle at 5% 10%, rgba(197, 157, 136, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 95% 90%, rgba(197, 157, 136, 0.15) 0%, transparent 40%);
     background-attachment: fixed;
 }
 
@@ -190,8 +190,8 @@ img {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(74, 74, 74, 0.4) 0%, rgba(224, 176, 160, 0.3) 100%);
-    /* Soft warm overlay */
+    background: linear-gradient(135deg, rgba(74, 59, 50, 0.3) 0%, rgba(197, 157, 136, 0.4) 100%);
+    /* Warmer, lighter overlay */
     z-index: 1;
 }
 
@@ -302,6 +302,20 @@ img {
 /* Services Section */
 .services-section {
     background-color: var(--color-bg);
+    /* Nude background */
+    position: relative;
+}
+
+.services-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.4) 0%, transparent 60%);
+    /* Soft highlight */
+    pointer-events: none;
 }
 
 .welcome-offer {
@@ -427,11 +441,14 @@ img {
     position: absolute;
     inset: 0;
     border-radius: var(--radius-md);
-    padding: 2px;
+    padding: 3px;
+    /* Thicker border */
     background: linear-gradient(45deg, var(--color-accent), transparent);
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    /* Standard property */
     pointer-events: none;
 }
 
@@ -546,17 +563,19 @@ img {
 }
 
 .calendly-placeholder {
-    background: rgba(255, 255, 255, 0.9);
-    /* More opaque for readability */
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.95);
+    /* Almost solid white for pop */
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     padding: var(--spacing-md);
     border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-lg);
+    /* Stronger shadow */
     max-width: 600px;
     margin: 0 auto;
     text-align: left;
-    border: 1px solid rgba(255, 255, 255, 0.6);
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    /* Visible white border */
 }
 
 .mock-calendar-header {
