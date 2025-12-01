@@ -192,14 +192,38 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         const name = document.getElementById('name').value;
         const email = document.getElementById('email').value;
+        const phone = document.getElementById('phone').value;
+        const bookingDetailsText = bookingDetails.textContent;
+        
+        // Get selected date and time
+        const selectedTime = document.querySelector('.mock-time.active');
+        const timeString = selectedTime ? selectedTime.textContent : 'Non sélectionné';
+        
+        // Prepare email content
+        const emailSubject = `Nouvelle réservation - ${name}`;
+        const emailBody = `Nouvelle réservation reçue :
 
-        // Simulate API call
-        setTimeout(() => {
-            alert(`Merci ${name} ! Votre rendez-vous a été confirmé. Un e-mail de confirmation a été envoyé à ${email}.`);
-            bookingModal.classList.remove('active');
-            bookingForm.reset();
-            document.querySelectorAll('.mock-time').forEach(t => t.classList.remove('active'));
-        }, 500);
+Nom complet : ${name}
+Email : ${email}
+Téléphone : ${phone}
+${bookingDetailsText}
+Heure sélectionnée : ${timeString}
+
+---
+Message envoyé depuis le site web Lumina Laser`;
+
+        // Create mailto link
+        const mailtoLink = `mailto:skepilaser@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+        
+        // Open email client
+        window.location.href = mailtoLink;
+        
+        // Show confirmation message
+        alert(`Merci ${name} ! Votre demande de réservation est en cours d'envoi à skepilaser@gmail.com. Veuillez confirmer l'envoi dans votre client de messagerie.`);
+        
+        bookingModal.classList.remove('active');
+        bookingForm.reset();
+        document.querySelectorAll('.mock-time').forEach(t => t.classList.remove('active'));
     });
 
     // Initial render
