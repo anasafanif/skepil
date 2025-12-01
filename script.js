@@ -78,13 +78,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function renderCalendar(date) {
         calendarGrid.innerHTML = `
-            <div class="mock-day-name">MON</div>
-            <div class="mock-day-name">TUE</div>
-            <div class="mock-day-name">WED</div>
-            <div class="mock-day-name">THU</div>
-            <div class="mock-day-name">FRI</div>
-            <div class="mock-day-name">SAT</div>
-            <div class="mock-day-name">SUN</div>
+            <div class="mock-day-name">LUN</div>
+            <div class="mock-day-name">MAR</div>
+            <div class="mock-day-name">MER</div>
+            <div class="mock-day-name">JEU</div>
+            <div class="mock-day-name">VEN</div>
+            <div class="mock-day-name">SAM</div>
+            <div class="mock-day-name">DIM</div>
         `;
 
         const year = date.getFullYear();
@@ -96,8 +96,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-        const monthNames = ["January", "February", "March", "April", "May", "June",
-            "July", "August", "September", "October", "November", "December"
+        const monthNames = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin",
+            "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"
         ];
 
         calendarLabel.textContent = `${monthNames[month]} ${year}`;
@@ -144,10 +144,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 const timeSlot = document.createElement('div');
                 timeSlot.classList.add('mock-time');
 
-                const displayHour = hour > 12 ? hour - 12 : hour;
-                const ampm = hour >= 12 ? 'PM' : 'AM';
+                const displayHour = hour;
                 const displayMin = min === 0 ? '00' : min;
-                const timeString = `${displayHour}:${displayMin} ${ampm}`;
+                const timeString = `${displayHour}:${displayMin}`;
 
                 timeSlot.textContent = timeString;
 
@@ -157,8 +156,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     // Open Modal
                     if (selectedDate) {
-                        const dateString = selectedDate.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-                        bookingDetails.textContent = `You are booking a consultation for ${dateString} at ${timeString}.`;
+                        const dateString = selectedDate.toLocaleDateString('fr-FR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+                        bookingDetails.textContent = `Vous réservez une consultation pour le ${dateString} à ${timeString}.`;
                         bookingModal.classList.add('active');
                     }
                 });
@@ -196,7 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Simulate API call
         setTimeout(() => {
-            alert(`Thank you, ${name}! Your appointment has been confirmed. A confirmation email has been sent to ${email}.`);
+            alert(`Merci ${name} ! Votre rendez-vous a été confirmé. Un e-mail de confirmation a été envoyé à ${email}.`);
             bookingModal.classList.remove('active');
             bookingForm.reset();
             document.querySelectorAll('.mock-time').forEach(t => t.classList.remove('active'));
