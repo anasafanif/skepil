@@ -136,11 +136,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function renderTimeSlots() {
         timeSlotsContainer.innerHTML = '';
-        const startTime = 10; // 10:00 AM
-        const endTime = 20; // 08:00 PM
+        const startTime = 10; // 10:00
+        const endTime = 19; // 19:00 (last slot will be 18:30)
 
         for (let hour = startTime; hour < endTime; hour++) {
             for (let min = 0; min < 60; min += 30) {
+                // Skip 19:00 and 19:30 - they are after endTime anyway since hour < 19
                 const timeSlot = document.createElement('div');
                 timeSlot.classList.add('mock-time');
 
