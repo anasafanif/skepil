@@ -146,14 +146,14 @@ img {
 
 .btn {
     display: inline-block;
-    padding: 1.1rem 2.5rem;
+    padding: 0.95rem 2rem;
     background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
     color: var(--color-white);
     font-family: var(--font-body);
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 1.5px;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     border: none;
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -224,7 +224,9 @@ img {
 
 /* Hero Section */
 .hero-section {
-    height: 90vh;
+    height: 100vh;
+    min-height: 600px;
+    max-height: 800px;
     /* Slightly shorter to show curve */
     background-image: url('https://images.unsplash.com/photo-1560750588-73207b1ef5b8?q=80&w=2070&auto=format&fit=crop');
     background-size: cover;
@@ -256,12 +258,13 @@ img {
     position: relative;
     z-index: 2;
     max-width: 800px;
+    padding: 2rem 1rem;
 }
 
 .hero-logo {
-    width: 140px;
+    width: 110px;
     height: auto;
-    margin: 0 auto var(--spacing-lg) auto;
+    margin: 0 auto 1.5rem auto;
     display: block;
     filter: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.25));
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -273,7 +276,7 @@ img {
         transform: translateY(0px);
     }
     50% {
-        transform: translateY(-10px);
+        transform: translateY(-5px);
     }
 }
 
@@ -283,30 +286,55 @@ img {
 }
 
 @media (max-width: 768px) {
+    .hero-section {
+        height: 100vh;
+        min-height: 500px;
+        max-height: 700px;
+    }
+
     .hero-logo {
-        width: 90px;
-        margin-bottom: var(--spacing-sm);
+        width: 80px;
+        margin-bottom: 1rem;
+    }
+
+    .hero-content h1 {
+        font-size: 2rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .hero-content p {
+        font-size: 0.95rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .hero-content {
+        padding: 1rem;
+    }
+
+    .btn {
+        padding: 0.85rem 1.75rem;
+        font-size: 0.75rem;
     }
 }
 
 .hero-content h1 {
-    font-size: 3.8rem;
-    margin-bottom: var(--spacing-md);
+    font-size: 3rem;
+    margin-bottom: 1rem;
     text-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
     font-weight: 600;
     letter-spacing: -0.5px;
-    line-height: 1.1;
+    line-height: 1.15;
 }
 
 .hero-content p {
-    font-size: 1.25rem;
-    margin-bottom: var(--spacing-lg);
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
     max-width: 650px;
     margin-left: auto;
     margin-right: auto;
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     font-weight: 300;
-    line-height: 1.8;
+    line-height: 1.6;
 }
 
 /* Promise Section */
