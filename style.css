@@ -210,6 +210,27 @@ img {
     max-width: 800px;
 }
 
+.hero-logo {
+    width: 120px;
+    height: auto;
+    margin: 0 auto var(--spacing-md) auto;
+    display: block;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.2));
+    transition: var(--transition-fast);
+}
+
+.hero-logo:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.3));
+}
+
+@media (max-width: 768px) {
+    .hero-logo {
+        width: 90px;
+        margin-bottom: var(--spacing-sm);
+    }
+}
+
 .hero-content h1 {
     font-size: 3.5rem;
     margin-bottom: var(--spacing-md);
