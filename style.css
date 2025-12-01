@@ -357,10 +357,6 @@ img {
     transform: scaleX(1);
 }
 
-.promise-card:nth-child(2) {
-    border-radius: var(--shape-blob-2);
-}
-
 .promise-card:hover {
     transform: translateY(-12px) scale(1.03);
     box-shadow: var(--shadow-deep);
@@ -726,11 +722,6 @@ img {
     .steps-grid::before {
         display: none;
     }
-
-    /* Staggered Layout */
-    .step-card:nth-child(2) {
-        transform: translateY(40px);
-    }
 }
 
 .step-card {
@@ -746,23 +737,12 @@ img {
     overflow: hidden;
 }
 
-.step-card:nth-child(even) {
-    border-radius: var(--shape-blob-2);
-}
-
 .step-card:hover {
     transform: translateY(-12px) scale(1.03);
     box-shadow: var(--shadow-deep);
     z-index: 2;
     border-color: rgba(212, 165, 165, 0.3);
     background: linear-gradient(135deg, var(--color-white) 0%, var(--color-bg-alt) 100%);
-}
-
-/* Maintain stagger on hover for 2nd child */
-@media (min-width: 769px) {
-    .step-card:nth-child(2):hover {
-        transform: translateY(30px) scale(1.02);
-    }
 }
 
 .step-number {
