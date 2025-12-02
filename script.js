@@ -220,45 +220,53 @@ Message envoyé depuis le site web skepil`;
         submitButton.textContent = 'Envoi en cours...';
 
         try {
-            // Fillout Integration - 1,000 free submissions/month
+            // Extract date from bookingDetailsText
+            const dateOnly = bookingDetailsText.replace('Vous réservez une consultation pour le ', '').replace(' à ' + timeString, '');
+            
+            // Submit to Fillout - This will automatically trigger your "Thank you email" workflow
+            // The workflow will send the email automatically!
             const filloutFormUrl = 'https://forms.fillout.com/t/96f4jpqvt1us';
             
-            // Use Fillout - 1,000 free submissions/month
-            // Fillout accepts form submissions via POST with field names matching your form
-            const filloutData = {
-                'Nom complet': name,
-                'Email': email,
-                'Téléphone': phone,
-                'Date et heure': `${bookingDetailsText} - ${timeString}`,
-                'Message': emailBody
-            };
+            // Create hidden iframe to submit to Fillout
+            const iframe = document.createElement('iframe');
+            iframe.name = 'filloutFrame';
+            iframe.style.display = 'none';
+            iframe.style.width = '0';
+            iframe.style.height = '0';
+            document.body.appendChild(iframe);
             
-            // Try Fillout submission
-            try {
-                const formData = new FormData();
-                Object.keys(filloutData).forEach(key => {
-                    formData.append(key, filloutData[key]);
-                });
-                
-                const filloutResponse = await fetch(filloutFormUrl, {
-                    method: 'POST',
-                    mode: 'no-cors', // Fillout may require this
-                    body: formData
-                });
-
-                // With no-cors, we can't check response, but submission should work
-                alert(`Merci ${name} ! Votre demande de réservation a été envoyée avec succès. Nous vous contacterons bientôt à ${email} pour confirmer votre rendez-vous.`);
-                bookingModal.classList.remove('active');
-                bookingForm.reset();
-                document.querySelectorAll('.mock-time').forEach(t => t.classList.remove('active'));
-                return;
-            } catch (filloutError) {
-                console.log('Fillout submission attempted, trying fallback...', filloutError);
-                // Continue to fallback
-            }
-
-            // Fallback: FormSubmit (works immediately, 50/month limit)
-            const response = await fetch('https://formsubmit.co/ajax/skepilaser@gmail.com', {
+            // Create hidden form that submits to Fillout
+            const hiddenForm = document.createElement('form');
+            hiddenForm.method = 'POST';
+            hiddenForm.action = filloutFormUrl;
+            hiddenForm.target = 'filloutFrame';
+            hiddenForm.style.display = 'none';
+            
+            // Add all fields matching your Fillout form exactly:
+            // Based on your form: "Nom complet", "Email", "Phone number", "Date", "message"
+            const filloutFields = [
+                { name: 'Nom complet', value: name },
+                { name: 'Email', value: email },
+                { name: 'Phone number', value: phone },
+                { name: 'Date', value: `${dateOnly} à ${timeString}` },
+                { name: 'message', value: `Réservation pour le ${bookingDetailsText}\nHeure: ${timeString}\n\nClient: ${name}\nEmail: ${email}\nTéléphone: ${phone}` }
+            ];
+            
+            filloutFields.forEach(field => {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = field.name;
+                input.value = field.value;
+                hiddenForm.appendChild(input);
+            });
+            
+            document.body.appendChild(hiddenForm);
+            
+            // Submit to Fillout - This triggers your workflow automatically!
+            hiddenForm.submit();
+            
+            // Also send backup email via FormSubmit to ensure delivery
+            const emailResponse = await fetch('https://formsubmit.co/ajax/skepilaser@gmail.com', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -275,14 +283,22 @@ Message envoyé depuis le site web skepil`;
                 })
             });
 
-            if (response.ok) {
-                alert(`Merci ${name} ! Votre demande de réservation a été envoyée avec succès à skepilaser@gmail.com. Nous vous contacterons bientôt pour confirmer votre rendez-vous.`);
-                bookingModal.classList.remove('active');
-                bookingForm.reset();
-                document.querySelectorAll('.mock-time').forEach(t => t.classList.remove('active'));
-            } else {
-                throw new Error('Erreur lors de l\'envoi');
-            }
+            // Clean up hidden form and iframe after submission
+            setTimeout(() => {
+                if (document.body.contains(hiddenForm)) {
+                    document.body.removeChild(hiddenForm);
+                }
+                if (document.body.contains(iframe)) {
+                    document.body.removeChild(iframe);
+                }
+            }, 3000);
+
+            // Show success message
+            alert(`Merci ${name} ! Votre demande de réservation a été envoyée avec succès. Le workflow Fillout va automatiquement vous envoyer un email de confirmation. Nous vous contacterons bientôt pour confirmer votre rendez-vous.`);
+            bookingModal.classList.remove('active');
+            bookingForm.reset();
+            document.querySelectorAll('.mock-time').forEach(t => t.classList.remove('active'));
+            
         } catch (error) {
             console.error('Error:', error);
             alert(`Désolé, une erreur s'est produite lors de l'envoi. Veuillez réessayer ou nous contacter directement à skepilaser@gmail.com ou +212 772 316 201`);
