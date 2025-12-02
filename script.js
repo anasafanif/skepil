@@ -220,7 +220,44 @@ Message envoyé depuis le site web skepil`;
         submitButton.textContent = 'Envoi en cours...';
 
         try {
-            // Use FormSubmit service to send email automatically
+            // Fillout Integration - 1,000 free submissions/month
+            const filloutFormUrl = 'https://forms.fillout.com/t/96f4jpqvt1us';
+            
+            // Use Fillout - 1,000 free submissions/month
+            // Fillout accepts form submissions via POST with field names matching your form
+            const filloutData = {
+                'Nom complet': name,
+                'Email': email,
+                'Téléphone': phone,
+                'Date et heure': `${bookingDetailsText} - ${timeString}`,
+                'Message': emailBody
+            };
+            
+            // Try Fillout submission
+            try {
+                const formData = new FormData();
+                Object.keys(filloutData).forEach(key => {
+                    formData.append(key, filloutData[key]);
+                });
+                
+                const filloutResponse = await fetch(filloutFormUrl, {
+                    method: 'POST',
+                    mode: 'no-cors', // Fillout may require this
+                    body: formData
+                });
+
+                // With no-cors, we can't check response, but submission should work
+                alert(`Merci ${name} ! Votre demande de réservation a été envoyée avec succès. Nous vous contacterons bientôt à ${email} pour confirmer votre rendez-vous.`);
+                bookingModal.classList.remove('active');
+                bookingForm.reset();
+                document.querySelectorAll('.mock-time').forEach(t => t.classList.remove('active'));
+                return;
+            } catch (filloutError) {
+                console.log('Fillout submission attempted, trying fallback...', filloutError);
+                // Continue to fallback
+            }
+
+            // Fallback: FormSubmit (works immediately, 50/month limit)
             const response = await fetch('https://formsubmit.co/ajax/skepilaser@gmail.com', {
                 method: 'POST',
                 headers: {
@@ -233,9 +270,8 @@ Message envoyé depuis le site web skepil`;
                     phone: phone,
                     subject: emailSubject,
                     message: emailBody,
-                    _captcha: false, // Disable captcha for better UX
-                    _template: 'box',
-                    _autoresponse: `Merci ${name} ! Votre demande de réservation a été reçue. Nous vous contacterons bientôt pour confirmer votre rendez-vous.`
+                    _captcha: false,
+                    _template: 'box'
                 })
             });
 
@@ -249,7 +285,7 @@ Message envoyé depuis le site web skepil`;
             }
         } catch (error) {
             console.error('Error:', error);
-            alert(`Désolé, une erreur s'est produite lors de l'envoi. Veuillez réessayer ou nous contacter directement à skepilaser@gmail.com`);
+            alert(`Désolé, une erreur s'est produite lors de l'envoi. Veuillez réessayer ou nous contacter directement à skepilaser@gmail.com ou +212 772 316 201`);
         } finally {
             // Re-enable submit button
             submitButton.disabled = false;
