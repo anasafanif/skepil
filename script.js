@@ -189,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    bookingForm.addEventListener('submit', (e) => {
+    bookingForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const name = document.getElementById('name').value;
         const email = document.getElementById('email').value;
@@ -211,20 +211,50 @@ ${bookingDetailsText}
 Heure sélectionnée : ${timeString}
 
 ---
-Message envoyé depuis le site web Lumina Laser`;
+Message envoyé depuis le site web skepil`;
 
-        // Create mailto link
-        const mailtoLink = `mailto:skepilaser@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
-        
-        // Open email client
-        window.location.href = mailtoLink;
-        
-        // Show confirmation message
-        alert(`Merci ${name} ! Votre demande de réservation est en cours d'envoi à skepilaser@gmail.com. Veuillez confirmer l'envoi dans votre client de messagerie.`);
-        
-        bookingModal.classList.remove('active');
-        bookingForm.reset();
-        document.querySelectorAll('.mock-time').forEach(t => t.classList.remove('active'));
+        // Disable submit button to prevent double submission
+        const submitButton = bookingForm.querySelector('button[type="submit"]');
+        const originalButtonText = submitButton.textContent;
+        submitButton.disabled = true;
+        submitButton.textContent = 'Envoi en cours...';
+
+        try {
+            // Use FormSubmit service to send email automatically
+            const response = await fetch('https://formsubmit.co/ajax/skepilaser@gmail.com', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: name,
+                    email: email,
+                    phone: phone,
+                    subject: emailSubject,
+                    message: emailBody,
+                    _captcha: false, // Disable captcha for better UX
+                    _template: 'box',
+                    _autoresponse: `Merci ${name} ! Votre demande de réservation a été reçue. Nous vous contacterons bientôt pour confirmer votre rendez-vous.`
+                })
+            });
+
+            if (response.ok) {
+                alert(`Merci ${name} ! Votre demande de réservation a été envoyée avec succès à skepilaser@gmail.com. Nous vous contacterons bientôt pour confirmer votre rendez-vous.`);
+                bookingModal.classList.remove('active');
+                bookingForm.reset();
+                document.querySelectorAll('.mock-time').forEach(t => t.classList.remove('active'));
+            } else {
+                throw new Error('Erreur lors de l\'envoi');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert(`Désolé, une erreur s'est produite lors de l'envoi. Veuillez réessayer ou nous contacter directement à skepilaser@gmail.com`);
+        } finally {
+            // Re-enable submit button
+            submitButton.disabled = false;
+            submitButton.textContent = originalButtonText;
+        }
     });
 
     // Initial render
