@@ -1,5 +1,33 @@
 // Script.js - Logic for Premium Laser Hair Removal Landing Page
 
+// Custom Alert Function with "sk epil" title
+function showCustomAlert(message) {
+    const alertModal = document.getElementById('customAlertModal');
+    const alertMessage = document.getElementById('alertMessage');
+    const alertOkButton = document.getElementById('alertOkButton');
+    
+    if (!alertModal || !alertMessage || !alertOkButton) {
+        // Fallback to browser alert if modal doesn't exist
+        alert(message);
+        return;
+    }
+    
+    alertMessage.textContent = message;
+    alertModal.classList.add('active');
+    
+    // Close modal when OK button is clicked
+    alertOkButton.onclick = () => {
+        alertModal.classList.remove('active');
+    };
+    
+    // Close modal when clicking outside
+    alertModal.onclick = (e) => {
+        if (e.target === alertModal) {
+            alertModal.classList.remove('active');
+        }
+    };
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Website loaded successfully.');
 
@@ -293,15 +321,15 @@ Message envoyé depuis le site web skepil`;
                 }
             }, 3000);
 
-            // Show success message
-            alert(`Merci ${name} ! Votre demande de réservation a été envoyée avec succès. Le workflow Fillout va automatiquement vous envoyer un email de confirmation. Nous vous contacterons bientôt pour confirmer votre rendez-vous.`);
+            // Show success message with custom alert
+            showCustomAlert(`Merci ${name} ! Votre demande de réservation a été envoyée avec succès. Nous vous contacterons bientôt pour confirmer votre rendez-vous.`);
             bookingModal.classList.remove('active');
             bookingForm.reset();
             document.querySelectorAll('.mock-time').forEach(t => t.classList.remove('active'));
             
         } catch (error) {
             console.error('Error:', error);
-            alert(`Désolé, une erreur s'est produite lors de l'envoi. Veuillez réessayer ou nous contacter directement à skepilaser@gmail.com ou +212 772 316 201`);
+            showCustomAlert(`Désolé, une erreur s'est produite lors de l'envoi. Veuillez réessayer ou nous contacter directement à skepilaser@gmail.com ou +212 772 316 201`);
         } finally {
             // Re-enable submit button
             submitButton.disabled = false;
