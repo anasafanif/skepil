@@ -654,9 +654,21 @@ img {
 }
 
 .package-card:nth-child(3) {
-    /* Prestige - Elegant Pink */
+    /* Prestige Absolu - Elegant Pink */
     background: linear-gradient(135deg, var(--color-bg-alt) 0%, rgba(232, 212, 212, 0.3) 100%);
     border-color: rgba(212, 165, 165, 0.4);
+}
+
+.package-card:nth-child(4) {
+    /* Harmonie - Soft Gradient */
+    background: linear-gradient(135deg, var(--color-bg-light) 0%, rgba(255, 249, 249, 0.4) 100%);
+    border-color: rgba(212, 165, 165, 0.3);
+}
+
+.package-card:nth-child(5) {
+    /* Corps Entier Platinium - Premium Gradient */
+    background: linear-gradient(135deg, rgba(232, 212, 212, 0.2) 0%, var(--color-bg-alt) 100%);
+    border-color: rgba(212, 165, 165, 0.45);
 }
 
 .package-card:hover {
@@ -688,9 +700,12 @@ img {
 }
 
 .package-card .savings {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: #2ecc71;
     font-style: italic;
+    line-height: 1.5;
+    margin-top: var(--spacing-xs);
+    padding: var(--spacing-xs);
 }
 
 .fidelity-cure {
