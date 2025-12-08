@@ -618,7 +618,7 @@ img {
 
 .packages-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: var(--spacing-md);
     margin-bottom: var(--spacing-md);
     max-width: 1400px;
@@ -626,55 +626,18 @@ img {
     margin-right: auto;
 }
 
-/* Layout for 5 cards: 2-2-1 centered */
-.packages-grid .package-card:nth-child(1) {
-    grid-column: 1 / 3; /* Spans 2 columns */
-}
-
-.packages-grid .package-card:nth-child(2) {
-    grid-column: 3 / 5; /* Spans 2 columns */
-}
-
-.packages-grid .package-card:nth-child(3) {
-    grid-column: 1 / 3; /* Spans 2 columns */
-}
-
-.packages-grid .package-card:nth-child(4) {
-    grid-column: 3 / 5; /* Spans 2 columns */
-}
-
-.packages-grid .package-card:nth-child(5) {
-    grid-column: 2 / 4; /* Centered, spans 2 columns */
-}
+/* Layout for 6 cards: 3-3 perfect grid */
+/* All cards will automatically fit in the 3-column grid */
 
 @media (max-width: 1200px) {
     .packages-grid {
         grid-template-columns: repeat(2, 1fr);
-    }
-    .packages-grid .package-card:nth-child(1),
-    .packages-grid .package-card:nth-child(2),
-    .packages-grid .package-card:nth-child(3),
-    .packages-grid .package-card:nth-child(4),
-    .packages-grid .package-card:nth-child(5) {
-        grid-column: 1 / -1; /* Full width on medium screens */
-    }
-    .packages-grid .package-card:nth-child(5) {
-        max-width: 500px;
-        margin: 0 auto;
     }
 }
 
 @media (max-width: 768px) {
     .packages-grid {
         grid-template-columns: 1fr;
-    }
-    .packages-grid .package-card:nth-child(1),
-    .packages-grid .package-card:nth-child(2),
-    .packages-grid .package-card:nth-child(3),
-    .packages-grid .package-card:nth-child(4),
-    .packages-grid .package-card:nth-child(5) {
-        grid-column: 1;
-        max-width: 100%;
     }
 }
 
@@ -782,16 +745,39 @@ img {
         inset 0 1px 0 rgba(255, 255, 255, 0.75);
 }
 
-.package-card:nth-child(5) {
-    /* Corps Entier Platinium - Premium Gradient */
+.package-card:nth-child(4) {
+    /* Prestige Intégral - Premium Gradient */
     background: 
-        linear-gradient(135deg, rgba(232, 212, 212, 0.2) 0%, var(--color-bg-alt) 100%),
-        radial-gradient(circle at 40% 60%, rgba(212, 165, 165, 0.11) 0%, transparent 65%),
-        radial-gradient(circle at 80% 20%, rgba(232, 212, 212, 0.08) 0%, transparent 55%);
-    border-color: rgba(212, 165, 165, 0.45);
+        linear-gradient(135deg, var(--color-bg-alt) 0%, rgba(232, 212, 212, 0.25) 100%),
+        radial-gradient(circle at 60% 40%, rgba(212, 165, 165, 0.11) 0%, transparent 65%);
+    border-color: rgba(212, 165, 165, 0.4);
     box-shadow: 
         0 10px 36px -8px rgba(212, 165, 165, 0.32),
         inset 0 1px 0 rgba(255, 255, 255, 0.65);
+}
+
+.package-card:nth-child(5) {
+    /* Douceur Absolue - Soft Gradient */
+    background: 
+        linear-gradient(135deg, var(--color-bg-light) 0%, rgba(255, 249, 249, 0.5) 100%),
+        radial-gradient(circle at 50% 70%, rgba(212, 165, 165, 0.1) 0%, transparent 60%);
+    border-color: rgba(212, 165, 165, 0.35);
+    box-shadow: 
+        0 9px 34px -8px rgba(212, 165, 165, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+.package-card:nth-child(6) {
+    /* Royal Platinium - Ultra Premium Gradient */
+    background: 
+        linear-gradient(135deg, rgba(232, 212, 212, 0.3) 0%, var(--color-bg-alt) 100%),
+        radial-gradient(circle at 30% 50%, rgba(212, 165, 165, 0.13) 0%, transparent 70%),
+        radial-gradient(circle at 70% 30%, rgba(232, 212, 212, 0.1) 0%, transparent 60%);
+    border-color: rgba(212, 165, 165, 0.5);
+    box-shadow: 
+        0 14px 42px -10px rgba(212, 165, 165, 0.38),
+        0 0 0 1px rgba(212, 165, 165, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
 }
 
 .package-card:hover {
