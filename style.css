@@ -436,14 +436,14 @@ img {
 
 .tech-image img {
     width: 100%;
-    border-radius: var(--shape-blob-2);
-    /* Organic Blob Mask */
-    box-shadow: var(--shadow-deep);
-    transition: transform 0.5s ease;
+    height: auto;
+    display: block;
+    background: transparent;
 }
 
 .tech-image img:hover {
-    transform: scale(1.02) rotate(1deg);
+    transform: scale(1.02);
+    transition: transform 0.3s ease;
 }
 
 .tech-intro {
