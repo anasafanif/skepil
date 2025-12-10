@@ -228,7 +228,7 @@ img {
     min-height: 600px;
     max-height: 800px;
     /* Slightly shorter to show curve */
-    background-image: url('https://images.unsplash.com/photo-1560750588-73207b1ef5b8?q=80&w=2070&auto=format&fit=crop');
+    background-image: url('media/backgrd.png');
     background-size: cover;
     background-position: center;
     position: relative;
