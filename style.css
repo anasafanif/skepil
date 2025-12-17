@@ -287,18 +287,24 @@ img {
 
 @media (max-width: 768px) {
     .hero-section {
-        height: 100vh;
+        /* Use dynamic viewport on mobile browsers (prevents content hiding under address bar) */
+        height: 100svh;
         min-height: 500px;
         max-height: 700px;
         background-size: contain;
         background-position: center center;
         background-repeat: no-repeat;
         background-color: var(--color-bg-light);
+        /* iOS notch / browser UI safe-area */
+        padding-top: calc(env(safe-area-inset-top, 0px) + 14px);
+        box-sizing: border-box;
+        align-items: flex-start;
     }
 
     .hero-logo {
         width: 80px;
         margin-bottom: 1rem;
+        animation: none;
     }
 
     .hero-content h1 {
@@ -313,11 +319,88 @@ img {
 
     .hero-content {
         padding: 1rem;
+        padding-top: calc(env(safe-area-inset-top, 0px) + 10px);
     }
 
     .btn {
         padding: 0.85rem 1.75rem;
         font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Packages: prevent ribbon clipping on small cards */
+    .featured-badge {
+        top: 12px;
+        right: 12px;
+        transform: none;
+        padding: 6px 10px;
+        font-size: 0.7rem;
+        border-radius: 9999px;
+        letter-spacing: 0.8px;
+        box-shadow: 0 6px 18px rgba(212, 165, 165, 0.35);
+    }
+}
+
+@media (max-width: 600px) {
+    /* Booking calendar: make header/grid breathe on mobile */
+    .calendly-placeholder {
+        padding: var(--spacing-md);
+    }
+
+    .mock-calendar-header {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .mock-calendar-header h3 {
+        font-size: 1.05rem;
+        line-height: 1.25;
+    }
+
+    .calendar-nav {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .calendar-nav i {
+        padding: 10px 12px;
+        border-radius: 9999px;
+        background: rgba(212, 165, 165, 0.12);
+    }
+
+    #calendarLabel {
+        font-size: 0.95rem;
+        line-height: 1.2;
+    }
+
+    .mock-calendar-grid {
+        gap: 6px;
+    }
+
+    .mock-day-name {
+        font-size: 0.75rem;
+        letter-spacing: 0.6px;
+    }
+
+    .mock-day {
+        padding: 8px;
+        font-size: 0.9rem;
+    }
+
+    .mock-time-slots {
+        grid-template-columns: repeat(auto-fit, minmax(84px, 1fr));
+        gap: 8px;
+    }
+
+    .mock-time {
+        padding: 10px 8px;
+        font-size: 0.95rem;
     }
 }
 
