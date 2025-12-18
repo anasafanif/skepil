@@ -424,6 +424,107 @@ img {
     }
 }
 
+/* Extra small mobile devices (very narrow browsers) */
+@media (max-width: 400px) {
+    /* Container adjustments */
+    .container {
+        width: 95%;
+        padding: 0 0.75rem;
+    }
+
+    /* Hero section adjustments for very narrow screens */
+    .hero-section {
+        min-height: 450px;
+        max-height: 600px;
+        padding-top: calc(env(safe-area-inset-top, 0px) + 10px);
+    }
+
+    .hero-logo {
+        width: 65px;
+        margin-bottom: 0.75rem;
+    }
+
+    .hero-content {
+        padding: 0.75rem;
+        padding-top: calc(env(safe-area-inset-top, 0px) + 30px);
+        margin-top: 10px;
+    }
+
+    .hero-content h1 {
+        font-size: 1.6rem;
+        line-height: 1.2;
+        margin-bottom: 0.5rem;
+    }
+
+    .hero-content p {
+        font-size: 0.85rem;
+        margin-bottom: 1rem;
+        line-height: 1.5;
+    }
+
+    .btn {
+        padding: 0.85rem 1.5rem;
+        font-size: 0.7rem;
+        letter-spacing: 1px;
+        width: 100%;
+        max-width: 280px;
+    }
+
+    /* Calendar adjustments for very narrow screens */
+    .calendly-placeholder {
+        padding: 1rem;
+        border-radius: 20px;
+    }
+
+    .mock-calendar-header h3 {
+        font-size: 0.95rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .calendar-nav {
+        gap: 10px;
+        width: 100%;
+    }
+
+    .calendar-nav i {
+        padding: 8px 10px;
+        font-size: 0.9rem;
+    }
+
+    #calendarLabel {
+        font-size: 0.85rem;
+        padding: 0 3px;
+    }
+
+    .mock-calendar-grid {
+        gap: 2px;
+        margin-bottom: 1rem;
+    }
+
+    .mock-day-name {
+        font-size: 0.6rem;
+        letter-spacing: 0.1px;
+        padding: 3px 0px;
+        font-weight: 600;
+    }
+
+    .mock-day {
+        padding: 5px 1px;
+        font-size: 0.75rem;
+        border-radius: 3px;
+    }
+
+    .mock-time-slots {
+        grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+        gap: 6px;
+    }
+
+    .mock-time {
+        padding: 8px 6px;
+        font-size: 0.85rem;
+    }
+}
+
 .hero-content h1 {
     font-size: 3rem;
     margin-bottom: 1rem;
