@@ -318,7 +318,8 @@ img {
 
     .hero-content {
         padding: 1rem;
-        padding-top: calc(env(safe-area-inset-top, 0px) + 10px);
+        padding-top: calc(env(safe-area-inset-top, 0px) + 40px);
+        margin-top: 20px;
     }
 
     .btn {
@@ -352,6 +353,7 @@ img {
     /* Booking calendar: make header/grid breathe on mobile */
     .calendly-placeholder {
         padding: var(--spacing-md);
+        overflow-x: visible;
     }
 
     .mock-calendar-header {
@@ -370,33 +372,45 @@ img {
         display: flex;
         align-items: center;
         justify-content: center;
-        flex-wrap: wrap;
-        gap: 10px;
+        flex-wrap: nowrap;
+        gap: 15px;
+        width: 100%;
     }
 
     .calendar-nav i {
         padding: 10px 12px;
         border-radius: 9999px;
         background: rgba(212, 165, 165, 0.12);
+        flex-shrink: 0;
     }
 
     #calendarLabel {
         font-size: 0.95rem;
         line-height: 1.2;
+        white-space: nowrap;
+        padding: 0 5px;
     }
 
     .mock-calendar-grid {
-        gap: 6px;
+        gap: 3px;
+        width: 100%;
+        overflow: visible;
+        min-width: 0;
     }
 
     .mock-day-name {
-        font-size: 0.75rem;
-        letter-spacing: 0.6px;
+        font-size: 0.65rem;
+        letter-spacing: 0.2px;
+        padding: 4px 1px;
+        word-break: keep-all;
+        overflow: visible;
     }
 
     .mock-day {
-        padding: 8px;
-        font-size: 0.9rem;
+        padding: 6px 2px;
+        font-size: 0.8rem;
+        min-width: 0;
+        overflow: visible;
     }
 
     .mock-time-slots {
@@ -1136,6 +1150,8 @@ img {
     gap: 10px;
     text-align: center;
     margin-bottom: var(--spacing-md);
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .mock-day-name {
