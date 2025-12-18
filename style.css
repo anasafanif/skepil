@@ -291,14 +291,13 @@ img {
         height: 100svh;
         min-height: 500px;
         max-height: 700px;
-        background-size: contain;
+        background-size: cover;
         background-position: center center;
         background-repeat: no-repeat;
-        background-color: var(--color-bg-light);
         /* iOS notch / browser UI safe-area */
         padding-top: calc(env(safe-area-inset-top, 0px) + 14px);
         box-sizing: border-box;
-        align-items: flex-start;
+        align-items: center;
     }
 
     .hero-logo {
@@ -323,8 +322,15 @@ img {
     }
 
     .btn {
-        padding: 0.85rem 1.75rem;
-        font-size: 0.75rem;
+        padding: 1rem 2rem;
+        font-size: 0.8rem;
+        display: block;
+        margin: 0 auto;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
     }
 }
 
